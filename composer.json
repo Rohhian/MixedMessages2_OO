@@ -1,0 +1,24 @@
+{
+  "name": "rohhian/mixedmessages2",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "miile",
+      "email": "email@example.com"
+    }
+  ],
+  "require": {
+    "ext-pdo": "*",
+    "vlucas/phpdotenv": "^5.6",
+    "guzzlehttp/guzzle": "^7.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "MixedMessages2\\": "src/",
+      "MixedMessages2\\Controllers\\": "src/Controllers",
+      "Public\\": "public/"
+    }
+  }
+}

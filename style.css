@@ -1,0 +1,82 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#header {
+    display: grid;
+    border-radius: 10px;
+    height: fit-content;
+    min-height: 6em;
+    align-content: space-evenly;
+}
+
+#inputs {
+    text-align: center;
+}
+
+input {
+    width: 9em;
+}
+
+button {
+    width: 7em;
+}
+
+#errorMessage {
+    text-align: center;
+    border-radius: 10px;
+}
+
+#box {
+    display: grid;
+    height: 5em;
+    padding-top: 8vh;
+    align-content: center;
+    justify-content: center;
+}
+
+#box2 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(265px, 265px));
+    grid-column-gap: 2em;
+    grid-row-gap: 1em;
+    padding-top: 8vh;
+    justify-content: center;
+    text-align: center;
+}
+
+#weather, #weather2, #weather3, #weather4 {
+    padding: 2em;
+    border: 1px solid black;
+}
+
+#weather:hover, #weather2:hover, #weather3:hover, #weather4:hover {
+    background-color: lightgray;
+}
+
+h3 {
+    margin: 0;
+}
+
+.message {
+    margin: auto auto auto auto;
+    font-size: 3vmax;
+    text-align: center;
+    background-color: yellow;
+    border-radius: 10px;
+    width: fit-content;
+    padding: 0.2em;
+    animation: fadeInOut 5s infinite;
+}
+
+@keyframes fadeInOut {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
