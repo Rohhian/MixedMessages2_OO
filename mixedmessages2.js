@@ -2,15 +2,15 @@ let adjectives = []
 let nouns = []
 let verbs = []
 let who = []
-let data1 = []
-let data2 = []
-let data3 = []
-let data4 = []
-const messageBox = document.getElementById('message')
-const messageBox2 = document.getElementById('weather')
-const messageBox3 = document.getElementById('weather4')
-const messageBox4 = document.getElementById('weather2')
-const messageBox5 = document.getElementById('weather3')
+let weatherDataKesklinn = []
+let weatherDataCuba = []
+let weatherDataMustamae = []
+let weatherDataTurba = []
+const messageBoxRandomSentence = document.getElementById('message')
+const messageBoxWeatherDataKesklinn = document.getElementById('weather')
+const messageBoxWeatherDataCuba = document.getElementById('weather4')
+const messageBoxWeatherDataMustamae = document.getElementById('weather2')
+const messageBoxWeatherDataTurba = document.getElementById('weather3')
 let responseFromBackend = ''
 
 // eslint-disable-next-line no-unused-vars
@@ -24,27 +24,19 @@ async function sendNewWord (theTable, theWord) {
   })
   responseFromBackend = await response.json()
   if (responseFromBackend !== "Don't send empty strings" && responseFromBackend !== 'Duplicate entry') {
-    bringData()
+    bringWordsAndWeatherData()
   }
   document.getElementById('errorMessage').innerHTML = responseFromBackend
 }
 
-function bringData () {
-  async function loadData () {
-    const response = await fetch('http://localhost/MixedMessages2/getwords')
-    return await response.json()
-  }
+async function bringWordsAndWeatherData () {
+  const response = await fetch('http://localhost/MixedMessages2/getwords')
+  const data = await response.json();
 
-  loadData().then((data) => {
-    adjectives = data[0]
-    nouns = data[1]
-    verbs = data[2]
-    who = data[3]
-    data1 = data[4]
-    data2 = data[5]
-    data3 = data[6]
-    data4 = data[7]
-  }).then(showCurrentWeather).then(calcRandAndShow)
+  [adjectives, nouns, verbs, who, weatherDataKesklinn, weatherDataCuba, weatherDataMustamae, weatherDataTurba] = data
+
+  showCurrentWeather()
+  calcRandAndShow()
 }
 
 function calcRandAndShow () {
@@ -60,38 +52,38 @@ function calcRandAndShow () {
     a1 = Math.floor(Math.random() * adjectives.length)
   }
   const w = Math.floor(Math.random() * who.length)
-  messageBox.classList.add('message')
-  messageBox.innerHTML = `${who[w]} ${adjectives[a]} ${nouns[n]} is ${verbs[v]} the ${adjectives[a1]} ${nouns[n1]}`
+  messageBoxRandomSentence.classList.add('message')
+  messageBoxRandomSentence.innerHTML = `${who[w]} ${adjectives[a]} ${nouns[n]} is ${verbs[v]} the ${adjectives[a1]} ${nouns[n1]}`
 }
 
 function showCurrentWeather () {
-  const cardinal = getCardinalDirection(data1.wind.deg)
-  const cardinal2 = getCardinalDirection(data2.wind.deg)
-  const cardinal3 = getCardinalDirection(data3.wind.deg)
-  const cardinal4 = getCardinalDirection(data4.wind.deg)
-  messageBox2.innerHTML = `<h3>Ilm hetkel<br>${new Date(data1.dt * 1000).toLocaleString('et-EE', {
+  const cardinal = getCardinalDirection(weatherDataKesklinn.wind.deg)
+  const cardinal2 = getCardinalDirection(weatherDataCuba.wind.deg)
+  const cardinal3 = getCardinalDirection(weatherDataMustamae.wind.deg)
+  const cardinal4 = getCardinalDirection(weatherDataTurba.wind.deg)
+  messageBoxWeatherDataKesklinn.innerHTML = `<h3>Ilm hetkel<br>${new Date(weatherDataKesklinn.dt * 1000).toLocaleString('et-EE', {
     dateStyle: 'long',
     timeStyle: 'short'
-  })}</h3>Asukoht: ${data1.name}<br>(<strong>Kesklinn</strong>)<br><br>${data1.weather[0].description}<br>Pilvisus:  ${data1.clouds.all}%<br><br>P&auml;ike t&otilde;useb:  ${new Date(data1.sys.sunrise * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br>P&auml;ike loojub:  ${new Date(data1.sys.sunset * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br><br>Temperatuur:  ${data1.main.temp}&#8451<br>Tundub nagu:  ${data1.main.feels_like}&#8451<br>Niiskus:  ${data1.main.humidity}%<br><br>Tuule kiirus:  ${data1.wind.speed} m/s<br>Tuule suund:  ${cardinal}`
-  messageBox3.innerHTML = `<h3>Ilm hetkel<br>${new Date(data2.dt * 1000).toLocaleString('et-EE', {
+  })}</h3>Asukoht: ${weatherDataKesklinn.name}<br>(<strong>Kesklinn</strong>)<br><br>${weatherDataKesklinn.weather[0].description}<br>Pilvisus:  ${weatherDataKesklinn.clouds.all}%<br><br>P&auml;ike t&otilde;useb:  ${new Date(weatherDataKesklinn.sys.sunrise * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br>P&auml;ike loojub:  ${new Date(weatherDataKesklinn.sys.sunset * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br><br>Temperatuur:  ${weatherDataKesklinn.main.temp}&#8451<br>Tundub nagu:  ${weatherDataKesklinn.main.feels_like}&#8451<br>Niiskus:  ${weatherDataKesklinn.main.humidity}%<br><br>Tuule kiirus:  ${weatherDataKesklinn.wind.speed} m/s<br>Tuule suund:  ${cardinal}`
+  messageBoxWeatherDataCuba.innerHTML = `<h3>Ilm hetkel<br>${new Date(weatherDataCuba.dt * 1000).toLocaleString('et-EE', {
     timeZone: 'Cuba',
     dateStyle: 'long',
     timeStyle: 'short'
-  })}</h3>Asukoht: Cuba<br>(<strong>${data2.name}</strong>)<br><br>${data2.weather[0].description}<br>Pilvisus:  ${data2.clouds.all}%<br><br>P&auml;ike t&otilde;useb:  ${new Date(data2.sys.sunrise * 1000).toLocaleString('et-EE', {
+  })}</h3>Asukoht: Cuba<br>(<strong>${weatherDataCuba.name}</strong>)<br><br>${weatherDataCuba.weather[0].description}<br>Pilvisus:  ${weatherDataCuba.clouds.all}%<br><br>P&auml;ike t&otilde;useb:  ${new Date(weatherDataCuba.sys.sunrise * 1000).toLocaleString('et-EE', {
     timeZone: 'Cuba',
     timeStyle: 'short'
-  })}<br>P&auml;ike loojub:  ${new Date(data2.sys.sunset * 1000).toLocaleString('et-EE', {
+  })}<br>P&auml;ike loojub:  ${new Date(weatherDataCuba.sys.sunset * 1000).toLocaleString('et-EE', {
     timeZone: 'Cuba',
     timeStyle: 'short'
-  })}<br><br>Temperatuur:  ${data2.main.temp}&#8451<br>Tundub nagu:  ${data2.main.feels_like}&#8451<br>Niiskus:  ${data2.main.humidity}%<br><br>Tuule kiirus:  ${data2.wind.speed} m/s<br>Tuule suund:  ${cardinal2}`
-  messageBox4.innerHTML = `<h3>Ilm hetkel<br>${new Date(data3.dt * 1000).toLocaleString('et-EE', {
+  })}<br><br>Temperatuur:  ${weatherDataCuba.main.temp}&#8451<br>Tundub nagu:  ${weatherDataCuba.main.feels_like}&#8451<br>Niiskus:  ${weatherDataCuba.main.humidity}%<br><br>Tuule kiirus:  ${weatherDataCuba.wind.speed} m/s<br>Tuule suund:  ${cardinal2}`
+  messageBoxWeatherDataMustamae.innerHTML = `<h3>Ilm hetkel<br>${new Date(weatherDataMustamae.dt * 1000).toLocaleString('et-EE', {
     dateStyle: 'long',
     timeStyle: 'short'
-  })}</h3>Asukoht: ${data3.name}<br>(<strong>Mustam&auml;e</strong>)<br><br>${data3.weather[0].description}<br>Pilvisus:  ${data3.clouds.all}%<br><br>P&auml;ike t&otilde;useb:  ${new Date(data3.sys.sunrise * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br>P&auml;ike loojub:  ${new Date(data3.sys.sunset * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br><br>Temperatuur:  ${data3.main.temp}&#8451<br>Tundub nagu:  ${data3.main.feels_like}&#8451<br>Niiskus:  ${data3.main.humidity}%<br><br>Tuule kiirus:  ${data3.wind.speed} m/s<br>Tuule suund:  ${cardinal3}`
-  messageBox5.innerHTML = `<h3>Ilm hetkel<br>${new Date(data4.dt * 1000).toLocaleString('et-EE', {
+  })}</h3>Asukoht: ${weatherDataMustamae.name}<br>(<strong>Mustam&auml;e</strong>)<br><br>${weatherDataMustamae.weather[0].description}<br>Pilvisus:  ${weatherDataMustamae.clouds.all}%<br><br>P&auml;ike t&otilde;useb:  ${new Date(weatherDataMustamae.sys.sunrise * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br>P&auml;ike loojub:  ${new Date(weatherDataMustamae.sys.sunset * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br><br>Temperatuur:  ${weatherDataMustamae.main.temp}&#8451<br>Tundub nagu:  ${weatherDataMustamae.main.feels_like}&#8451<br>Niiskus:  ${weatherDataMustamae.main.humidity}%<br><br>Tuule kiirus:  ${weatherDataMustamae.wind.speed} m/s<br>Tuule suund:  ${cardinal3}`
+  messageBoxWeatherDataTurba.innerHTML = `<h3>Ilm hetkel<br>${new Date(weatherDataTurba.dt * 1000).toLocaleString('et-EE', {
     dateStyle: 'long',
     timeStyle: 'short'
-  })}</h3>Asukoht: ${data4.name}<br>(<strong>Turba</strong>)<br><br>${data4.weather[0].description}<br>Pilvisus:  ${data4.clouds.all}%<br><br>P&auml;ike t&otilde;useb:  ${new Date(data4.sys.sunrise * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br>P&auml;ike loojub:  ${new Date(data4.sys.sunset * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br><br>Temperatuur:  ${data4.main.temp}&#8451<br>Tundub nagu:  ${data4.main.feels_like}&#8451<br>Niiskus:  ${data4.main.humidity}%<br><br>Tuule kiirus:  ${data4.wind.speed} m/s<br>Tuule suund:  ${cardinal4}`
+  })}</h3>Asukoht: ${weatherDataTurba.name}<br>(<strong>Turba</strong>)<br><br>${weatherDataTurba.weather[0].description}<br>Pilvisus:  ${weatherDataTurba.clouds.all}%<br><br>P&auml;ike t&otilde;useb:  ${new Date(weatherDataTurba.sys.sunrise * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br>P&auml;ike loojub:  ${new Date(weatherDataTurba.sys.sunset * 1000).toLocaleString('et-EE', { timeStyle: 'short' })}<br><br>Temperatuur:  ${weatherDataTurba.main.temp}&#8451<br>Tundub nagu:  ${weatherDataTurba.main.feels_like}&#8451<br>Niiskus:  ${weatherDataTurba.main.humidity}%<br><br>Tuule kiirus:  ${weatherDataTurba.wind.speed} m/s<br>Tuule suund:  ${cardinal4}`
 }
 
 function getCardinalDirection (angle) {
@@ -99,6 +91,6 @@ function getCardinalDirection (angle) {
   return directions[Math.round(angle / 45) % 8]
 }
 
-bringData()
+bringWordsAndWeatherData()
 setInterval(calcRandAndShow, 5000)
 setInterval(showCurrentWeather, 50000)

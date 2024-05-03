@@ -12,7 +12,7 @@ class SetWordsController {
         $table = $_POST['table'];
         $word = $_POST['word'];
 
-        if ($table != ('adjectives' || 'nouns' || 'verbs' || 'who')) {
+        if ($table != $_ENV['TABLE_ADJECTIVES'] || $_ENV['TABLE_NOUNS'] || $_ENV['TABLE_VERBS'] || $_ENV['TABLE_WHO']) {
             echo json_encode("Wrong table name");
         } elseif ($word == '') {
             echo json_encode("Don't send empty strings");
