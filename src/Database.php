@@ -3,6 +3,7 @@
 namespace MixedMessages2;
 
 use PDO;
+use PDOException;
 
 class Database {
     private string $dbHost;
@@ -18,6 +19,12 @@ class Database {
     }
 
     public function getConnection(): PDO {
-        return new PDO("mysql:host=$this->dbHost;dbname=$this->dbName", $this->dbUser, $this->dbPassword);
+        try {
+            $pdo = new PDO("mysql:host=$this->dbHost;dbname=$this->dbName", $this->dbUser, $this->dbPassword);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $pdo;
+        } catch (PDOException $e) {
+            echo "Connection failed: " . $e->getMessage();
+        }
     }
 }
