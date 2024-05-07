@@ -7,29 +7,25 @@ use GuzzleHttp\Client;
 class GetWeatherDataController {
     private array $data;
 
-    private function getWeatherApiKey(): string {
-        return $_ENV['WEATHER_API_KEY'];
-    }
-
     public function __construct() {
         $client = new Client();
         $response0 = $client->get('https://api.openweathermap.org/data/2.5/weather', [
-            'query' => ['appid' => $this->getWeatherApiKey(),
+            'query' => ['appid' => $_ENV['WEATHER_API_KEY'],
                         'id' => '588409',
                         'units' => 'metric'],
         ]);
         $response1 = $client->get('https://api.openweathermap.org/data/2.5/weather', [
-            'query' => ['appid' => $this->getWeatherApiKey(),
+            'query' => ['appid' => $_ENV['WEATHER_API_KEY'],
                         'id' => '3553478',
                         'units' => 'metric'],
         ]);
         $response2 = $client->get('https://api.openweathermap.org/data/2.5/weather', [
-            'query' => ['appid' => $this->getWeatherApiKey(),
+            'query' => ['appid' => $_ENV['WEATHER_API_KEY'],
                         'id' => '794965',
                         'units' => 'metric'],
         ]);
         $response3 = $client->get('https://api.openweathermap.org/data/2.5/weather', [
-            'query' => ['appid' => $this->getWeatherApiKey(),
+            'query' => ['appid' => $_ENV['WEATHER_API_KEY'],
                         'id' => '588157',
                         'units' => 'metric'],
         ]);

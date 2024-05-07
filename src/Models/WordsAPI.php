@@ -1,12 +1,31 @@
 <?php
 
-namespace MixedMessages2\Controllers;
+namespace MixedMessages2\Models;
 
-use Exception;
 use MixedMessages2\Database;
+use PDO;
+use Exception;
 
-class SetWordsController {
-    public function __construct() {
+class WordsAPI {
+    private array $data;
+
+    private function getTableData($tablename): array {
+        $db = new Database();
+        $preparedSql = $db->getConnection()->prepare("SELECT col2 FROM $tablename ORDER BY id");
+        $preparedSql->execute();
+        $result = $preparedSql->fetchAll(PDO::FETCH_COLUMN);
+        return array_map('htmlspecialchars', $result);
+    }
+
+    public function getWords(): array {
+        $this->data[0] = $this->getTableData($_ENV['TABLE_ADJECTIVES']);
+        $this->data[1] = $this->getTableData($_ENV['TABLE_NOUNS']);
+        $this->data[2] = $this->getTableData($_ENV['TABLE_VERBS']);
+        $this->data[3] = $this->getTableData($_ENV['TABLE_WHO']);
+        return $this->data;
+    }
+
+    public function setWord() {
         $db = new Database();
 
         $tableFromPost = $_POST['table'];
