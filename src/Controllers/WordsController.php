@@ -41,9 +41,9 @@ class WordsController {
 
     public function setWord(string $tableFromPost, string $wordFromPost) {
         echo !$this->isValidTableName($tableFromPost) ? json_encode('Wrong table name') : null;
-        echo empty($wordFromPost) ? json_encode('Don\'t send empty strings') : null;
+        echo empty(trim($wordFromPost)) ? json_encode('Don\'t send empty strings') : null;
 
-        if (!$this->isValidTableName($tableFromPost) || empty($wordFromPost)) {
+        if (!$this->isValidTableName($tableFromPost) || empty(trim($wordFromPost))) {
             return;
         }
 
