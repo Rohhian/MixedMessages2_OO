@@ -2,27 +2,27 @@
 
 namespace MixedMessages2\Controllers;
 
-use MixedMessages2\Models\WordsAPI;
+use MixedMessages2\Models\WordsModel;
 
 class MainController {
     public function __construct() {
         echo $_SERVER['REQUEST_METHOD'] === 'GET' ? json_encode($this->sendResponseToFrontend()) : null;
-        $_SERVER['REQUEST_METHOD'] === 'POST' ? (new WordsAPI())->setWord() : die();
-    }
-
-    private function getAllWordsFromDatabase(): array {
-        return (new WordsAPI())->getWords();
-    }
-
-    private function getWeatherData(): array {
-        return (new GetWeatherDataController())->getWeatherData();
-    }
-
-    private function combineWordsAndWeatherData(): array {
-        return array_merge($this->getAllWordsFromDatabase(), $this->getWeatherData());
+        $_SERVER['REQUEST_METHOD'] === 'POST' ? (new WordsController(new WordsModel()))->setWord($_POST['table'], $_POST['word']) : die();
     }
 
     private function sendResponseToFrontend(): array {
         return $this->combineWordsAndWeatherData();
+    }
+    
+    private function combineWordsAndWeatherData(): array {
+        return array_merge($this->getAllWordsFromDatabase(), $this->getWeatherData());
+    }
+
+    private function getAllWordsFromDatabase(): array {
+        return (new WordsController(new WordsModel()))->getWords();
+    }
+
+    private function getWeatherData(): array {
+        return (new GetWeatherDataController())->getWeatherData();
     }
 }

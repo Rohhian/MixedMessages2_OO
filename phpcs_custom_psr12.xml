@@ -9,6 +9,9 @@
   <rule ref="PSR12">
     <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine"/>
   </rule>
+  <rule ref="PSR12">
+    <exclude name="Generic.Files.LineLength.TooLong"/>
+  </rule>
   <rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie"/>
 
 </ruleset>
