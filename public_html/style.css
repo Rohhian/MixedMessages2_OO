@@ -22,7 +22,7 @@ button {
     width: 7em;
 }
 
-.errorMessage {
+#errorMessage {
     text-align: center;
     border-radius: 10px;
 }
