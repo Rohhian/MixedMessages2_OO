@@ -4,7 +4,7 @@ namespace MixedMessages2;
 
 class Router {
     private array $routes = [
-        '/MixedMessages2/' => 'index.html',
+        '/MixedMessages2' => 'main.php',
         '/MixedMessages2/getwords' => 'MixedMessages2\Controllers\MainController',
         '/MixedMessages2/setwords' => 'MixedMessages2\Controllers\MainController',
     ];

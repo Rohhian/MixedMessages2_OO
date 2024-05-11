@@ -2,9 +2,7 @@
 
 namespace MixedMessages2\Controllers;
 
-use MixedMessages2\Database;
 use MixedMessages2\Models\WordsModel;
-use Exception;
 
 class WordsController {
     private array $allowedTableNames;

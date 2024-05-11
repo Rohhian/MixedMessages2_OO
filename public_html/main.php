@@ -29,7 +29,8 @@
 </button>
         </span>
     </div>
-    <div id="errorMessage">You will see really confusing messages</div>
+    <div class="errorMessage">You will see really confusing messages</div>
+    <div class="errorMessage"> <?php echo 'holy crap'; ?> </div>
 </div>
 
 <div id="box">
