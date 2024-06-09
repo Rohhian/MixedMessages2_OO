@@ -12,6 +12,8 @@
 
 #inputs {
     text-align: center;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 input {
@@ -25,6 +27,8 @@ button {
 #errorMessage {
     text-align: center;
     border-radius: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 #box {
@@ -52,6 +56,10 @@ button {
 
 #weather:hover, #weather2:hover, #weather3:hover, #weather4:hover {
     background-color: lightgray;
+}
+
+#logout {
+    float: right;
 }
 
 h3 {

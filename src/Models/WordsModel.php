@@ -7,7 +7,7 @@ use PDO;
 use Exception;
 
 class WordsModel {
-    public function getAllTableData($tableName): array {
+    public function getAllWordsFromTable($tableName): array {
         $db = new Database();
         
         try {

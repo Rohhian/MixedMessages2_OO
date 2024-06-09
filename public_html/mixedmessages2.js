@@ -30,7 +30,7 @@ async function sendNewWord (theTable, theWord) {
 }
 
 async function bringWordsAndWeatherData () {
-  const response = await fetch('http://localhost/MixedMessages2/getwords')
+  const response = await fetch('http://localhost/MixedMessages2/getwords', { method: 'POST' })
   const data = await response.json();
 
   [adjectives, nouns, verbs, who, weatherDataKesklinn, weatherDataCuba, weatherDataMustamae, weatherDataTurba] = data
@@ -91,6 +91,30 @@ function getCardinalDirection (angle) {
   return directions[Math.round(angle / 45) % 8]
 }
 
+async function checkAuthentication () {
+  const response = await fetch('http://localhost/MixedMessages2/checkAuthentication', { method: 'POST' })
+  const data = await response.json()
+
+  if (data.isAuthenticated) {
+    document.getElementById('logout').style.display = 'inline-block'
+  } else {
+    document.getElementById('logout').style.display = 'none'
+  }
+}
+
+// eslint-disable-next-line no-unused-vars
+async function logout () {
+  const response = await fetch('http://localhost/MixedMessages2/logout', { method: 'POST' })
+  const data = await response.json()
+
+  if (data.status === 'success') {
+    window.location.href = 'http://localhost/MixedMessages2'
+  } else {
+    console.error('Logout failed')
+  }
+}
+
 bringWordsAndWeatherData()
 setInterval(calcRandAndShow, 5000)
 setInterval(showCurrentWeather, 50000)
+checkAuthentication()

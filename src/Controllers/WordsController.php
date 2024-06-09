@@ -29,10 +29,10 @@ class WordsController {
     }
 
     public function getWords(): array {
-        $returnData[0] = $this->isValidTableName($_ENV['TABLE_ADJECTIVES']) ? $this->wordsModel->getAllTableData($_ENV['TABLE_ADJECTIVES']) : die();
-        $returnData[1] = $this->isValidTableName($_ENV['TABLE_NOUNS']) ? $this->wordsModel->getAllTableData($_ENV['TABLE_NOUNS']) : die();
-        $returnData[2] = $this->isValidTableName($_ENV['TABLE_VERBS']) ? $this->wordsModel->getAllTableData($_ENV['TABLE_VERBS']) : die();
-        $returnData[3] = $this->isValidTableName($_ENV['TABLE_WHO']) ? $this->wordsModel->getAllTableData($_ENV['TABLE_WHO']) : die();
+        $returnData[0] = $this->isValidTableName($_ENV['TABLE_ADJECTIVES']) ? $this->wordsModel->getAllWordsFromTable($_ENV['TABLE_ADJECTIVES']) : die();
+        $returnData[1] = $this->isValidTableName($_ENV['TABLE_NOUNS']) ? $this->wordsModel->getAllWordsFromTable($_ENV['TABLE_NOUNS']) : die();
+        $returnData[2] = $this->isValidTableName($_ENV['TABLE_VERBS']) ? $this->wordsModel->getAllWordsFromTable($_ENV['TABLE_VERBS']) : die();
+        $returnData[3] = $this->isValidTableName($_ENV['TABLE_WHO']) ? $this->wordsModel->getAllWordsFromTable($_ENV['TABLE_WHO']) : die();
         
         return $this->handleHtmlSpecialChars($returnData);
     }

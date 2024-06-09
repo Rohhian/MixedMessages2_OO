@@ -10,23 +10,20 @@
     <div id="inputs">
         <span style="display: inline-block">
             <input id="adj" type="text" name="adjectives" placeholder="enter new adjective">
-            <button onclick="sendNewWord(document.getElementById('adj').name, document.getElementById('adj').value)">
-    Send Adj
-</button>
+            <button onclick="sendNewWord(document.getElementById('adj').name, document.getElementById('adj').value)">Send Adj</button>
             &nbsp&nbsp||&nbsp&nbsp
-</span>
+        </span>
         <span style="display: inline-block">
             <input id="noun" type="text" name="nouns" placeholder="enter new noun">
-            <button onclick="sendNewWord(document.getElementById('noun').name, document.getElementById('noun').value)">
-    Send Noun
-</button>
+            <button onclick="sendNewWord(document.getElementById('noun').name, document.getElementById('noun').value)">Send Noun</button>
             &nbsp&nbsp||&nbsp&nbsp
-</span>
+        </span>
         <span style="display: inline-block">
             <input id="verb" type="text" name="verbs" placeholder="enter new verb">
-            <button onclick="sendNewWord(document.getElementById('verb').name, document.getElementById('verb').value)">
-    Send Verb
-</button>
+            <button onclick="sendNewWord(document.getElementById('verb').name, document.getElementById('verb').value)">Send Verb</button>
+        </span>
+        <span id="logout" style="display: inline-block">
+            <button onclick="logout()">Logout</button>
         </span>
     </div>
     <div id="errorMessage">You will see really confusing messages</div>
